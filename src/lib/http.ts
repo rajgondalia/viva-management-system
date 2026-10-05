@@ -10,6 +10,10 @@ export function errorResponse(e: unknown) {
   const pg = (e as { code?: string; detail?: string; cause?: { code?: string; detail?: string } });
   const code = pg?.code ?? pg?.cause?.code;
   const detail = pg?.detail ?? pg?.cause?.detail ?? "";
+  if (code === "ECONNREFUSED" || code === "ENOTFOUND") {
+    console.error(e);
+    return NextResponse.json({ error: "Database not reachable - check DATABASE_URL (in .env, or in Vercel Environment Variables) and redeploy." }, { status: 503 });
+  }
   if (code === "23505") {
     const field = detail.match(/\("?(\w+)"?\)=/)?.[1] ?? "value";
     return NextResponse.json({ error: `A record with the same ${field} already exists.` }, { status: 409 });

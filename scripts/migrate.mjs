@@ -11,6 +11,11 @@ if (fs.existsSync(".env")) {
   }
 }
 if (!process.env.DATABASE_URL) {
+  if (process.env.VERCEL) {
+    // on Vercel a missing DATABASE_URL must stop the build, otherwise the site tries localhost:5432
+    console.error("[migrate] DATABASE_URL is not set in Vercel > Settings > Environment Variables. Add it and redeploy.");
+    process.exit(1);
+  }
   console.warn("[migrate] DATABASE_URL not set - skipping migrations");
   process.exit(0);
 }
