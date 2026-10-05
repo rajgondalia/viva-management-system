@@ -1,0 +1,1445 @@
+{
+  "id": "d2599001-3b97-469c-8f92-160cce700422",
+  "prevId": "3d002713-4bb7-4f98-bfeb-27bc9a0c7c7b",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.AppUser": {
+      "name": "AppUser",
+      "schema": "",
+      "columns": {
+        "UserID": {
+          "name": "UserID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "Username": {
+          "name": "Username",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "FullName": {
+          "name": "FullName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "PasswordHash": {
+          "name": "PasswordHash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Role": {
+          "name": "Role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'user'"
+        },
+        "DepartmentID": {
+          "name": "DepartmentID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "IsActive": {
+          "name": "IsActive",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "CreatedAt": {
+          "name": "CreatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "UpdatedAt": {
+          "name": "UpdatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "AppUser_DepartmentID_Department_DepartmentID_fk": {
+          "name": "AppUser_DepartmentID_Department_DepartmentID_fk",
+          "tableFrom": "AppUser",
+          "tableTo": "Department",
+          "columnsFrom": [
+            "DepartmentID"
+          ],
+          "columnsTo": [
+            "DepartmentID"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "AppUser_Username_unique": {
+          "name": "AppUser_Username_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "Username"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.BankDetails": {
+      "name": "BankDetails",
+      "schema": "",
+      "columns": {
+        "BankDetailsID": {
+          "name": "BankDetailsID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "DepartmentID": {
+          "name": "DepartmentID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "NameAsPerBank": {
+          "name": "NameAsPerBank",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "BankName": {
+          "name": "BankName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "IFSCCode": {
+          "name": "IFSCCode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "BranchName": {
+          "name": "BranchName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "AccountNumber": {
+          "name": "AccountNumber",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ExternalFacultyID": {
+          "name": "ExternalFacultyID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ProofDocumentID": {
+          "name": "ProofDocumentID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "CreatedAt": {
+          "name": "CreatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "UpdatedAt": {
+          "name": "UpdatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "BankDetails_DepartmentID_Department_DepartmentID_fk": {
+          "name": "BankDetails_DepartmentID_Department_DepartmentID_fk",
+          "tableFrom": "BankDetails",
+          "tableTo": "Department",
+          "columnsFrom": [
+            "DepartmentID"
+          ],
+          "columnsTo": [
+            "DepartmentID"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "BankDetails_ExternalFacultyID_ExternalFaculty_ExternalFacultyID_fk": {
+          "name": "BankDetails_ExternalFacultyID_ExternalFaculty_ExternalFacultyID_fk",
+          "tableFrom": "BankDetails",
+          "tableTo": "ExternalFaculty",
+          "columnsFrom": [
+            "ExternalFacultyID"
+          ],
+          "columnsTo": [
+            "ExternalFacultyID"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "BankDetails_ProofDocumentID_Document_DocumentID_fk": {
+          "name": "BankDetails_ProofDocumentID_Document_DocumentID_fk",
+          "tableFrom": "BankDetails",
+          "tableTo": "Document",
+          "columnsFrom": [
+            "ProofDocumentID"
+          ],
+          "columnsTo": [
+            "DocumentID"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "BankDetails_ExternalFacultyID_unique": {
+          "name": "BankDetails_ExternalFacultyID_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "ExternalFacultyID"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.Bill": {
+      "name": "Bill",
+      "schema": "",
+      "columns": {
+        "BillID": {
+          "name": "BillID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "DepartmentID": {
+          "name": "DepartmentID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "BillNo": {
+          "name": "BillNo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "BillDate": {
+          "name": "BillDate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ExternalFacultyID": {
+          "name": "ExternalFacultyID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Purpose": {
+          "name": "Purpose",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'External Viva Examination'"
+        },
+        "PreApproval": {
+          "name": "PreApproval",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "BillDone": {
+          "name": "BillDone",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "TravelDate": {
+          "name": "TravelDate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "TravelFrom": {
+          "name": "TravelFrom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "TravelTo": {
+          "name": "TravelTo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "FuelTypeID": {
+          "name": "FuelTypeID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "TravelMode": {
+          "name": "TravelMode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "IsFixedTravel": {
+          "name": "IsFixedTravel",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "OneWayKM": {
+          "name": "OneWayKM",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "TotalKM": {
+          "name": "TotalKM",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "TravelRate": {
+          "name": "TravelRate",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "TravelAmount": {
+          "name": "TravelAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "DADate": {
+          "name": "DADate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "DANature": {
+          "name": "DANature",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Viva'"
+        },
+        "DARate": {
+          "name": "DARate",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 200
+        },
+        "DAAmount": {
+          "name": "DAAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 200
+        },
+        "TotalStudents": {
+          "name": "TotalStudents",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "HonorariumBase": {
+          "name": "HonorariumBase",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "HonorariumExtra": {
+          "name": "HonorariumExtra",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "HonorariumAmount": {
+          "name": "HonorariumAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "MiscDetails": {
+          "name": "MiscDetails",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "MiscAmount": {
+          "name": "MiscAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "MiscRemarks": {
+          "name": "MiscRemarks",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "TotalAmount": {
+          "name": "TotalAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "AdvanceAmount": {
+          "name": "AdvanceAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "GrandTotal": {
+          "name": "GrandTotal",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "Remarks": {
+          "name": "Remarks",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "CreatedAt": {
+          "name": "CreatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "UpdatedAt": {
+          "name": "UpdatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "Bill_BillDate_idx": {
+          "name": "Bill_BillDate_idx",
+          "columns": [
+            {
+              "expression": "BillDate",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "Bill_Faculty_idx": {
+          "name": "Bill_Faculty_idx",
+          "columns": [
+            {
+              "expression": "ExternalFacultyID",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "Bill_Dept_idx": {
+          "name": "Bill_Dept_idx",
+          "columns": [
+            {
+              "expression": "DepartmentID",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "Bill_DepartmentID_Department_DepartmentID_fk": {
+          "name": "Bill_DepartmentID_Department_DepartmentID_fk",
+          "tableFrom": "Bill",
+          "tableTo": "Department",
+          "columnsFrom": [
+            "DepartmentID"
+          ],
+          "columnsTo": [
+            "DepartmentID"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "Bill_ExternalFacultyID_ExternalFaculty_ExternalFacultyID_fk": {
+          "name": "Bill_ExternalFacultyID_ExternalFaculty_ExternalFacultyID_fk",
+          "tableFrom": "Bill",
+          "tableTo": "ExternalFaculty",
+          "columnsFrom": [
+            "ExternalFacultyID"
+          ],
+          "columnsTo": [
+            "ExternalFacultyID"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "Bill_FuelTypeID_FuelType_FuelTypeID_fk": {
+          "name": "Bill_FuelTypeID_FuelType_FuelTypeID_fk",
+          "tableFrom": "Bill",
+          "tableTo": "FuelType",
+          "columnsFrom": [
+            "FuelTypeID"
+          ],
+          "columnsTo": [
+            "FuelTypeID"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "Bill_BillNo_unique": {
+          "name": "Bill_BillNo_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "BillNo"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.BillExamItem": {
+      "name": "BillExamItem",
+      "schema": "",
+      "columns": {
+        "BillExamItemID": {
+          "name": "BillExamItemID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "BillID": {
+          "name": "BillID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ExamDate": {
+          "name": "ExamDate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "NatureOfDuty": {
+          "name": "NatureOfDuty",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Viva'"
+        },
+        "CourseID": {
+          "name": "CourseID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "CourseName": {
+          "name": "CourseName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "CourseShortName": {
+          "name": "CourseShortName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "SubjectID": {
+          "name": "SubjectID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "SubjectCode": {
+          "name": "SubjectCode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "SubjectName": {
+          "name": "SubjectName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "SubjectShortName": {
+          "name": "SubjectShortName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "NoOfStudents": {
+          "name": "NoOfStudents",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "BaseAmount": {
+          "name": "BaseAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "ExtraAmount": {
+          "name": "ExtraAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "Amount": {
+          "name": "Amount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "BillExamItem_BillID_Bill_BillID_fk": {
+          "name": "BillExamItem_BillID_Bill_BillID_fk",
+          "tableFrom": "BillExamItem",
+          "tableTo": "Bill",
+          "columnsFrom": [
+            "BillID"
+          ],
+          "columnsTo": [
+            "BillID"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "BillExamItem_CourseID_Course_CourseID_fk": {
+          "name": "BillExamItem_CourseID_Course_CourseID_fk",
+          "tableFrom": "BillExamItem",
+          "tableTo": "Course",
+          "columnsFrom": [
+            "CourseID"
+          ],
+          "columnsTo": [
+            "CourseID"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "BillExamItem_SubjectID_Subject_SubjectID_fk": {
+          "name": "BillExamItem_SubjectID_Subject_SubjectID_fk",
+          "tableFrom": "BillExamItem",
+          "tableTo": "Subject",
+          "columnsFrom": [
+            "SubjectID"
+          ],
+          "columnsTo": [
+            "SubjectID"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.College": {
+      "name": "College",
+      "schema": "",
+      "columns": {
+        "CollegeID": {
+          "name": "CollegeID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "DepartmentID": {
+          "name": "DepartmentID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "CollegeName": {
+          "name": "CollegeName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "CollegeShortName": {
+          "name": "CollegeShortName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "DistanceFromDU": {
+          "name": "DistanceFromDU",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "CreatedAt": {
+          "name": "CreatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "UpdatedAt": {
+          "name": "UpdatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "College_DepartmentID_Department_DepartmentID_fk": {
+          "name": "College_DepartmentID_Department_DepartmentID_fk",
+          "tableFrom": "College",
+          "tableTo": "Department",
+          "columnsFrom": [
+            "DepartmentID"
+          ],
+          "columnsTo": [
+            "DepartmentID"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "College_Dept_ShortName_unique": {
+          "name": "College_Dept_ShortName_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "DepartmentID",
+            "CollegeShortName"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.Course": {
+      "name": "Course",
+      "schema": "",
+      "columns": {
+        "CourseID": {
+          "name": "CourseID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "DepartmentID": {
+          "name": "DepartmentID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "CourseName": {
+          "name": "CourseName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "CourseShortName": {
+          "name": "CourseShortName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "CreatedAt": {
+          "name": "CreatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "UpdatedAt": {
+          "name": "UpdatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Course_DepartmentID_Department_DepartmentID_fk": {
+          "name": "Course_DepartmentID_Department_DepartmentID_fk",
+          "tableFrom": "Course",
+          "tableTo": "Department",
+          "columnsFrom": [
+            "DepartmentID"
+          ],
+          "columnsTo": [
+            "DepartmentID"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "Course_Dept_Name_unique": {
+          "name": "Course_Dept_Name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "DepartmentID",
+            "CourseName"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.Department": {
+      "name": "Department",
+      "schema": "",
+      "columns": {
+        "DepartmentID": {
+          "name": "DepartmentID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "DepartmentName": {
+          "name": "DepartmentName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Description": {
+          "name": "Description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "CreatedAt": {
+          "name": "CreatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "UpdatedAt": {
+          "name": "UpdatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "Department_DepartmentName_unique": {
+          "name": "Department_DepartmentName_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "DepartmentName"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.Document": {
+      "name": "Document",
+      "schema": "",
+      "columns": {
+        "DocumentID": {
+          "name": "DocumentID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "DepartmentID": {
+          "name": "DepartmentID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "FileName": {
+          "name": "FileName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "MimeType": {
+          "name": "MimeType",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'application/pdf'"
+        },
+        "Size": {
+          "name": "Size",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "Data": {
+          "name": "Data",
+          "type": "bytea",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "CreatedAt": {
+          "name": "CreatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Document_DepartmentID_Department_DepartmentID_fk": {
+          "name": "Document_DepartmentID_Department_DepartmentID_fk",
+          "tableFrom": "Document",
+          "tableTo": "Department",
+          "columnsFrom": [
+            "DepartmentID"
+          ],
+          "columnsTo": [
+            "DepartmentID"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ExternalFaculty": {
+      "name": "ExternalFaculty",
+      "schema": "",
+      "columns": {
+        "ExternalFacultyID": {
+          "name": "ExternalFacultyID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "DepartmentID": {
+          "name": "DepartmentID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ExternalFacultyName": {
+          "name": "ExternalFacultyName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Designation": {
+          "name": "Designation",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "Department": {
+          "name": "Department",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "MobileNumber": {
+          "name": "MobileNumber",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "CollegeID": {
+          "name": "CollegeID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "RCDocumentID": {
+          "name": "RCDocumentID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "CreatedAt": {
+          "name": "CreatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "UpdatedAt": {
+          "name": "UpdatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ExternalFaculty_DepartmentID_Department_DepartmentID_fk": {
+          "name": "ExternalFaculty_DepartmentID_Department_DepartmentID_fk",
+          "tableFrom": "ExternalFaculty",
+          "tableTo": "Department",
+          "columnsFrom": [
+            "DepartmentID"
+          ],
+          "columnsTo": [
+            "DepartmentID"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "ExternalFaculty_CollegeID_College_CollegeID_fk": {
+          "name": "ExternalFaculty_CollegeID_College_CollegeID_fk",
+          "tableFrom": "ExternalFaculty",
+          "tableTo": "College",
+          "columnsFrom": [
+            "CollegeID"
+          ],
+          "columnsTo": [
+            "CollegeID"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "ExternalFaculty_RCDocumentID_Document_DocumentID_fk": {
+          "name": "ExternalFaculty_RCDocumentID_Document_DocumentID_fk",
+          "tableFrom": "ExternalFaculty",
+          "tableTo": "Document",
+          "columnsFrom": [
+            "RCDocumentID"
+          ],
+          "columnsTo": [
+            "DocumentID"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "ExternalFaculty_Dept_Mobile_unique": {
+          "name": "ExternalFaculty_Dept_Mobile_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "DepartmentID",
+            "MobileNumber"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.FuelType": {
+      "name": "FuelType",
+      "schema": "",
+      "columns": {
+        "FuelTypeID": {
+          "name": "FuelTypeID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "DepartmentID": {
+          "name": "DepartmentID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "FuelTypeName": {
+          "name": "FuelTypeName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "RatePerKM": {
+          "name": "RatePerKM",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "IsFixedAmount": {
+          "name": "IsFixedAmount",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "CreatedAt": {
+          "name": "CreatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "UpdatedAt": {
+          "name": "UpdatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "FuelType_DepartmentID_Department_DepartmentID_fk": {
+          "name": "FuelType_DepartmentID_Department_DepartmentID_fk",
+          "tableFrom": "FuelType",
+          "tableTo": "Department",
+          "columnsFrom": [
+            "DepartmentID"
+          ],
+          "columnsTo": [
+            "DepartmentID"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "FuelType_Dept_Name_unique": {
+          "name": "FuelType_Dept_Name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "DepartmentID",
+            "FuelTypeName"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.Setting": {
+      "name": "Setting",
+      "schema": "",
+      "columns": {
+        "SettingID": {
+          "name": "SettingID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "default": 1
+        },
+        "DepartmentID": {
+          "name": "DepartmentID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "InstituteName": {
+          "name": "InstituteName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Darshan University'"
+        },
+        "InstituteShortName": {
+          "name": "InstituteShortName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'DU'"
+        },
+        "Place": {
+          "name": "Place",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Rajkot'"
+        },
+        "BillPrefix": {
+          "name": "BillPrefix",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'VIVA'"
+        },
+        "DefaultPurpose": {
+          "name": "DefaultPurpose",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'External Viva Examination'"
+        },
+        "DANature": {
+          "name": "DANature",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Viva'"
+        },
+        "DAAmount": {
+          "name": "DAAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 200
+        },
+        "HonorariumBaseStudents": {
+          "name": "HonorariumBaseStudents",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 45
+        },
+        "HonorariumBaseAmount": {
+          "name": "HonorariumBaseAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 500
+        },
+        "HonorariumExtraPerStudent": {
+          "name": "HonorariumExtraPerStudent",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 15
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Setting_DepartmentID_Department_DepartmentID_fk": {
+          "name": "Setting_DepartmentID_Department_DepartmentID_fk",
+          "tableFrom": "Setting",
+          "tableTo": "Department",
+          "columnsFrom": [
+            "DepartmentID"
+          ],
+          "columnsTo": [
+            "DepartmentID"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "Setting_DepartmentID_unique": {
+          "name": "Setting_DepartmentID_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "DepartmentID"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.Subject": {
+      "name": "Subject",
+      "schema": "",
+      "columns": {
+        "SubjectID": {
+          "name": "SubjectID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "DepartmentID": {
+          "name": "DepartmentID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "CourseID": {
+          "name": "CourseID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "SubjectCode": {
+          "name": "SubjectCode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "SubjectName": {
+          "name": "SubjectName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "SubjectShortName": {
+          "name": "SubjectShortName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "CreatedAt": {
+          "name": "CreatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "UpdatedAt": {
+          "name": "UpdatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "Subject_DepartmentID_Department_DepartmentID_fk": {
+          "name": "Subject_DepartmentID_Department_DepartmentID_fk",
+          "tableFrom": "Subject",
+          "tableTo": "Department",
+          "columnsFrom": [
+            "DepartmentID"
+          ],
+          "columnsTo": [
+            "DepartmentID"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "Subject_CourseID_Course_CourseID_fk": {
+          "name": "Subject_CourseID_Course_CourseID_fk",
+          "tableFrom": "Subject",
+          "tableTo": "Course",
+          "columnsFrom": [
+            "CourseID"
+          ],
+          "columnsTo": [
+            "CourseID"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "Subject_Course_Code_unique": {
+          "name": "Subject_Course_Code_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "CourseID",
+            "SubjectCode"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

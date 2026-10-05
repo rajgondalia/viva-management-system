@@ -1,0 +1,38 @@
+{
+  "name": "viva-management-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Viva Management System - External examiner TA/DA/Honorarium bill portal",
+  "scripts": {
+    "dev": "next dev",
+    "build": "node scripts/migrate.mjs && next build",
+    "start": "next start",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "node scripts/migrate.mjs",
+    "db:seed": "node scripts/seed.mjs",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "drizzle-orm": "0.36.4",
+    "exceljs": "4.4.0",
+    "jspdf": "2.5.2",
+    "jspdf-autotable": "3.8.4",
+    "lucide-react": "0.460.0",
+    "next": "14.2.35",
+    "pg": "8.13.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "xlsx": "0.18.5"
+  },
+  "devDependencies": {
+    "@types/node": "20.17.6",
+    "@types/pg": "8.11.10",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "autoprefixer": "10.4.20",
+    "drizzle-kit": "0.28.1",
+    "postcss": "8.4.49",
+    "tailwindcss": "3.4.15",
+    "typescript": "5.6.3"
+  }
+}

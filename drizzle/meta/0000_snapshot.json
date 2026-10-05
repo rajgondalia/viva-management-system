@@ -1,0 +1,782 @@
+{
+  "id": "3d002713-4bb7-4f98-bfeb-27bc9a0c7c7b",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.BankDetails": {
+      "name": "BankDetails",
+      "schema": "",
+      "columns": {
+        "BankDetailsID": {
+          "name": "BankDetailsID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "NameAsPerBank": {
+          "name": "NameAsPerBank",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "BankName": {
+          "name": "BankName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "IFSCCode": {
+          "name": "IFSCCode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "BranchName": {
+          "name": "BranchName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "AccountNumber": {
+          "name": "AccountNumber",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ExternalFacultyID": {
+          "name": "ExternalFacultyID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "CreatedAt": {
+          "name": "CreatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "UpdatedAt": {
+          "name": "UpdatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "BankDetails_ExternalFacultyID_ExternalFaculty_ExternalFacultyID_fk": {
+          "name": "BankDetails_ExternalFacultyID_ExternalFaculty_ExternalFacultyID_fk",
+          "tableFrom": "BankDetails",
+          "tableTo": "ExternalFaculty",
+          "columnsFrom": [
+            "ExternalFacultyID"
+          ],
+          "columnsTo": [
+            "ExternalFacultyID"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "BankDetails_ExternalFacultyID_unique": {
+          "name": "BankDetails_ExternalFacultyID_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "ExternalFacultyID"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.Bill": {
+      "name": "Bill",
+      "schema": "",
+      "columns": {
+        "BillID": {
+          "name": "BillID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "BillNo": {
+          "name": "BillNo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "BillDate": {
+          "name": "BillDate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ExternalFacultyID": {
+          "name": "ExternalFacultyID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Purpose": {
+          "name": "Purpose",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'External Viva Examination'"
+        },
+        "PreApproval": {
+          "name": "PreApproval",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "TravelDate": {
+          "name": "TravelDate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "TravelFrom": {
+          "name": "TravelFrom",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "TravelTo": {
+          "name": "TravelTo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "FuelTypeID": {
+          "name": "FuelTypeID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "TravelMode": {
+          "name": "TravelMode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "IsFixedTravel": {
+          "name": "IsFixedTravel",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "OneWayKM": {
+          "name": "OneWayKM",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "TotalKM": {
+          "name": "TotalKM",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "TravelRate": {
+          "name": "TravelRate",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "TravelAmount": {
+          "name": "TravelAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "DADate": {
+          "name": "DADate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "DANature": {
+          "name": "DANature",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Viva'"
+        },
+        "DARate": {
+          "name": "DARate",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 200
+        },
+        "DAAmount": {
+          "name": "DAAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 200
+        },
+        "HonorariumAmount": {
+          "name": "HonorariumAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "MiscDetails": {
+          "name": "MiscDetails",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "MiscAmount": {
+          "name": "MiscAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "MiscRemarks": {
+          "name": "MiscRemarks",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "TotalAmount": {
+          "name": "TotalAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "AdvanceAmount": {
+          "name": "AdvanceAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "GrandTotal": {
+          "name": "GrandTotal",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "Remarks": {
+          "name": "Remarks",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "CreatedAt": {
+          "name": "CreatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "UpdatedAt": {
+          "name": "UpdatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "Bill_BillDate_idx": {
+          "name": "Bill_BillDate_idx",
+          "columns": [
+            {
+              "expression": "BillDate",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "Bill_Faculty_idx": {
+          "name": "Bill_Faculty_idx",
+          "columns": [
+            {
+              "expression": "ExternalFacultyID",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "Bill_ExternalFacultyID_ExternalFaculty_ExternalFacultyID_fk": {
+          "name": "Bill_ExternalFacultyID_ExternalFaculty_ExternalFacultyID_fk",
+          "tableFrom": "Bill",
+          "tableTo": "ExternalFaculty",
+          "columnsFrom": [
+            "ExternalFacultyID"
+          ],
+          "columnsTo": [
+            "ExternalFacultyID"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "Bill_FuelTypeID_FuelType_FuelTypeID_fk": {
+          "name": "Bill_FuelTypeID_FuelType_FuelTypeID_fk",
+          "tableFrom": "Bill",
+          "tableTo": "FuelType",
+          "columnsFrom": [
+            "FuelTypeID"
+          ],
+          "columnsTo": [
+            "FuelTypeID"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "Bill_BillNo_unique": {
+          "name": "Bill_BillNo_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "BillNo"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.BillExamItem": {
+      "name": "BillExamItem",
+      "schema": "",
+      "columns": {
+        "BillExamItemID": {
+          "name": "BillExamItemID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "BillID": {
+          "name": "BillID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ExamDate": {
+          "name": "ExamDate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "NatureOfDuty": {
+          "name": "NatureOfDuty",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Viva'"
+        },
+        "SubjectCode": {
+          "name": "SubjectCode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "SubjectName": {
+          "name": "SubjectName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "NoOfStudents": {
+          "name": "NoOfStudents",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "BaseAmount": {
+          "name": "BaseAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "ExtraAmount": {
+          "name": "ExtraAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "Amount": {
+          "name": "Amount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "BillExamItem_BillID_Bill_BillID_fk": {
+          "name": "BillExamItem_BillID_Bill_BillID_fk",
+          "tableFrom": "BillExamItem",
+          "tableTo": "Bill",
+          "columnsFrom": [
+            "BillID"
+          ],
+          "columnsTo": [
+            "BillID"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.College": {
+      "name": "College",
+      "schema": "",
+      "columns": {
+        "CollegeID": {
+          "name": "CollegeID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "CollegeName": {
+          "name": "CollegeName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "CollegeShortName": {
+          "name": "CollegeShortName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "DistanceFromDU": {
+          "name": "DistanceFromDU",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "CreatedAt": {
+          "name": "CreatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "UpdatedAt": {
+          "name": "UpdatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "College_CollegeShortName_unique": {
+          "name": "College_CollegeShortName_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "CollegeShortName"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ExternalFaculty": {
+      "name": "ExternalFaculty",
+      "schema": "",
+      "columns": {
+        "ExternalFacultyID": {
+          "name": "ExternalFacultyID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "ExternalFacultyName": {
+          "name": "ExternalFacultyName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Designation": {
+          "name": "Designation",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "Department": {
+          "name": "Department",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "MobileNumber": {
+          "name": "MobileNumber",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "CollegeID": {
+          "name": "CollegeID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "CreatedAt": {
+          "name": "CreatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "UpdatedAt": {
+          "name": "UpdatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ExternalFaculty_CollegeID_College_CollegeID_fk": {
+          "name": "ExternalFaculty_CollegeID_College_CollegeID_fk",
+          "tableFrom": "ExternalFaculty",
+          "tableTo": "College",
+          "columnsFrom": [
+            "CollegeID"
+          ],
+          "columnsTo": [
+            "CollegeID"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "ExternalFaculty_MobileNumber_unique": {
+          "name": "ExternalFaculty_MobileNumber_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "MobileNumber"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.FuelType": {
+      "name": "FuelType",
+      "schema": "",
+      "columns": {
+        "FuelTypeID": {
+          "name": "FuelTypeID",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "FuelTypeName": {
+          "name": "FuelTypeName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "RatePerKM": {
+          "name": "RatePerKM",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "IsFixedAmount": {
+          "name": "IsFixedAmount",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "CreatedAt": {
+          "name": "CreatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "UpdatedAt": {
+          "name": "UpdatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "FuelType_FuelTypeName_unique": {
+          "name": "FuelType_FuelTypeName_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "FuelTypeName"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.Setting": {
+      "name": "Setting",
+      "schema": "",
+      "columns": {
+        "SettingID": {
+          "name": "SettingID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "default": 1
+        },
+        "InstituteName": {
+          "name": "InstituteName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Darshan University'"
+        },
+        "InstituteShortName": {
+          "name": "InstituteShortName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'DU'"
+        },
+        "Place": {
+          "name": "Place",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Rajkot'"
+        },
+        "BillPrefix": {
+          "name": "BillPrefix",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'VIVA'"
+        },
+        "DefaultPurpose": {
+          "name": "DefaultPurpose",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'External Viva Examination'"
+        },
+        "DANature": {
+          "name": "DANature",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Viva'"
+        },
+        "DAAmount": {
+          "name": "DAAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 200
+        },
+        "HonorariumBaseStudents": {
+          "name": "HonorariumBaseStudents",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 45
+        },
+        "HonorariumBaseAmount": {
+          "name": "HonorariumBaseAmount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 500
+        },
+        "HonorariumExtraPerStudent": {
+          "name": "HonorariumExtraPerStudent",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 15
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
